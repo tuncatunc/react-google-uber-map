@@ -5,6 +5,8 @@ import React, { Component } from 'react'
 import ControlPanel from './ControlPanel'
 import LocationPin from './LocationPin'
 
+import locationHistory from './data/transform-location-history.js'
+
 class UberReactMap extends Component {
 
   navStyle = {
@@ -105,13 +107,24 @@ class UberReactMap extends Component {
             <NavigationControl  onViewportChange={this.onViewportChange} />
           </div>
           <ControlPanel containerComponent={this.props.containerComponent} />
+          {
+            locationHistory.map(location =>
+              <Marker 
+                latitude={location.latitude} 
+                longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
+                <div>
+                  <LocationPin></LocationPin>
+                </div>
+              </Marker>
+            )
+          }
           <Marker 
             latitude={this.state.location.latitude} 
             longitude={this.state.location.longitude} offsetLeft={-20} offsetTop={-10}>
-          <div>
-            <LocationPin></LocationPin>
-          </div>
-        </Marker>
+            <div>
+              <LocationPin></LocationPin>
+            </div>
+          </Marker>
         </ReactMapGL>
       </div>
     )
