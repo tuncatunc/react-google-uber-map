@@ -39,14 +39,14 @@ class GoogleReactMap extends Component {
           // apiKey={YOUR_GOOGLE_MAP_API_KEY} // set if you need stats etc ...
           center={this.state.center}
           zoom={this.state.zoom}>
-          {/* {
+          {
             locationHistory.map(location =>
               <LocationPin
                 lat= { location.latitude }
                 lng= { location.longitude }
               />
             )
-          } */}
+          }
           <LocationPin
             lat={this.state.yourHereCoords.lat}
             lng={this.state.yourHereCoords.lng}
