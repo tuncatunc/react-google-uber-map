@@ -1,8 +1,9 @@
-import ReactMapGL, { NavigationControl } from 'react-map-gl'
+import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { Component } from 'react'
 import ControlPanel from './ControlPanel'
+import LocationPin from './LocationPin'
 
 class UberReactMap extends Component {
 
@@ -29,11 +30,15 @@ class UberReactMap extends Component {
       viewport: {
         latitude: 37.805,
         longitude: -122.447,
-        zoom: 15.5,
+        zoom: 9,
         bearing: 0,
         pitch: 0,
         width: 100,
         height: 100
+      },
+      location: {
+        latitude: 0,
+        longitude: 0
       }
     }
   }
@@ -67,11 +72,29 @@ class UberReactMap extends Component {
     this.setState({ viewport })
   }
 
+  componentWillReceiveProps(nextProps) {
+      if (nextProps.location.isAvailable){
+        this.setState({
+          viewport : {
+            ...this.state.viewport, 
+            latitude: nextProps.location.latitude,
+            longitude: nextProps.location.longitude
+          },
+          location: {
+            latitude: nextProps.location.latitude,
+            longitude: nextProps.location.longitude
+          }
+        }
+      )
+      console.log(this.state)
+    }
+  }
+  
   render () {
     const { mapStyle, viewport } = this.state
 
     return (
-      <div>
+      <div className='child'>
         <ReactMapGL
           {...viewport}
           mapStyle={mapStyle}
@@ -82,6 +105,13 @@ class UberReactMap extends Component {
             <NavigationControl  onViewportChange={this.onViewportChange} />
           </div>
           <ControlPanel containerComponent={this.props.containerComponent} />
+          <Marker 
+            latitude={this.state.location.latitude} 
+            longitude={this.state.location.longitude} offsetLeft={-20} offsetTop={-10}>
+          <div>
+            <LocationPin></LocationPin>
+          </div>
+        </Marker>
         </ReactMapGL>
       </div>
     )

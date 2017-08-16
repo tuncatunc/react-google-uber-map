@@ -15,7 +15,12 @@ class Maps extends Component {
     }
   }
 
-  getLocation () {
+  
+  componentWillMount() {
+    this.getLocation();
+  }
+  
+  getLocation  = () => {
     navigator.geolocation.watchPosition((position, err) => {
       if (!err) {
         const location = {
@@ -34,9 +39,8 @@ class Maps extends Component {
   render () {
     return (
       <div className='parent'>
-        <GoogleReactMap />
-        <br/>
-        <UberReactMap />
+        <GoogleReactMap location={this.state.location}/>
+        <UberReactMap location={this.state.location}/>
       </div>
     )
   }
