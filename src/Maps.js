@@ -4,15 +4,21 @@ import GoogleReactMap from './GoogleReactMap'
 import UberReactMap from './UberReactMap'
 
 class Maps extends Component {
+  state = {
+    location: {
+      isAvailable: false,
+      latitude: 0.0,
+      longitude: 0.0
+    },
+    center: {
+      latitude: 0.0,
+      longitude: 0.0,
+      zoom: 10
+    }
+  }
+
   constructor (props) {
     super(props)
-    this.state = {
-      location: {
-        isAvailable: false,
-        latitude: 0.0,
-        longitude: 0.0
-      }
-    }
   }
 
   
@@ -36,11 +42,25 @@ class Maps extends Component {
     })
   }
 
+  onMapChange = (center) => {
+    const newState = {
+      ...center
+    }
+
+    this.setState(newState)
+  }
+
   render () {
     return (
       <div className='parent'>
-        <GoogleReactMap location={this.state.location}/>
-        <UberReactMap location={this.state.location}/>
+        <GoogleReactMap 
+          location={this.state.location} 
+          onChange={this.onMapChange} 
+          center={this.state.center}/>
+        <UberReactMap 
+          location={this.state.location} 
+          center={this.state.center}
+          onChange={this.onMapChange}/>
       </div>
     )
   }

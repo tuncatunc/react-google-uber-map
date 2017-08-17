@@ -6,6 +6,7 @@
     "eslint": "^4.4.1",
     "google-map-react": "^0.24.0",
     "react": "^15.6.1",
+    "react-controllables": "^0.6.0",
     "react-dom": "^15.6.1",
     "react-map-gl": "^3.0.4",
     "react-router-dom": "^4.1.2"

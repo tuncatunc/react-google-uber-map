@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
 import locationHistory from './data/transform-location-history.js'
-
 import LocationPin from './LocationPin'
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>
-
 class GoogleReactMap extends Component {
+
   constructor (props) {
     super(props)
 
@@ -18,18 +16,24 @@ class GoogleReactMap extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const center =
-      nextProps.location.isAvailable
-        ? [nextProps.location.latitude, nextProps.location.longitude]
-        : [59.938043, 30.337157]
-
     const yourHereCoords =
       nextProps.location.isAvailable
         ? {lat: nextProps.location.latitude, lng: nextProps.location.longitude}
         : {lat: 0, lng: 0}
 
+    const center = [nextProps.center.latitude, nextProps.center.longitude];
     this.setState({center, yourHereCoords})
-    console.log(this.state)
+  }
+
+  onChange = (change) => {
+    this.props.onChange(
+      {
+        center: {
+          latitude: change.center.lat,
+          longitude: change.center.lng,
+          zoom: change.zoom
+        }
+      })
   }
 
   render () {
@@ -38,14 +42,16 @@ class GoogleReactMap extends Component {
         <GoogleMapReact
           // apiKey={YOUR_GOOGLE_MAP_API_KEY} // set if you need stats etc ...
           center={this.state.center}
-          zoom={this.state.zoom}>
+          zoom={this.state.zoom}
+          onChange={this.onChange}>
           {
-            locationHistory.map(location =>
-              <LocationPin
-                lat= { location.latitude }
-                lng= { location.longitude }
-              />
-            )
+            // locationHistory.map((location, index) =>
+            //   <LocationPin
+            //     key={index}
+            //     lat= { location.latitude }
+            //     lng= { location.longitude }
+            //   />
+            // )
           }
           <LocationPin
             lat={this.state.yourHereCoords.lat}

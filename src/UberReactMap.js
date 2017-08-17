@@ -72,6 +72,13 @@ class UberReactMap extends Component {
 
   onViewportChange = viewport => {
     this.setState({ viewport })
+    this.props.onChange({
+      center: {
+        latitude: viewport.latitude,
+        longitude: viewport.longitude,
+        zoom: viewport.zoom
+      }
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,7 +95,14 @@ class UberReactMap extends Component {
           }
         }
       )
-      console.log(this.state)
+
+      // Center of the map has changed
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          ...nextProps.center
+        }
+      })
     }
   }
   
@@ -106,17 +120,17 @@ class UberReactMap extends Component {
           <div style={this.navStyle}>
             <NavigationControl  onViewportChange={this.onViewportChange} />
           </div>
-          <ControlPanel containerComponent={this.props.containerComponent} />
           {
-            locationHistory.map(location =>
-              <Marker 
-                latitude={location.latitude} 
-                longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
-                <div>
-                  <LocationPin></LocationPin>
-                </div>
-              </Marker>
-            )
+          //   locationHistory.map((location, index) =>
+          //     <Marker 
+          //       key={index}
+          //       latitude={location.latitude} 
+          //       longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
+          //       <div>
+          //         <LocationPin></LocationPin>
+          //       </div>
+          //     </Marker>
+          //   )
           }
           <Marker 
             latitude={this.state.location.latitude} 
