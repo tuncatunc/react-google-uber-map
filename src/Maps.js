@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SplitterLayout from 'react-splitter-layout'
 
 import GoogleReactMap from './GoogleReactMap'
 import UberReactMap from './UberReactMap'
@@ -52,16 +53,22 @@ class Maps extends Component {
 
   render () {
     return (
-      <div className='parent'>
-        <GoogleReactMap 
+      <SplitterLayout vertical={true} customClassName={'map-panel'}>
+        <div style={{width: 400, height: 400}}>
+          <GoogleReactMap
           location={this.state.location} 
           onChange={this.onMapChange} 
+          onDrag={(drag) => console.log(drag)}
           center={this.state.center}/>
-        <UberReactMap 
+        </div>
+        <div>
+          <UberReactMap 
+          style={{overflow: 'hidden'}}
           location={this.state.location} 
           center={this.state.center}
           onChange={this.onMapChange}/>
-      </div>
+        </div>
+      </SplitterLayout>
     )
   }
 }

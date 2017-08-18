@@ -1,4 +1,4 @@
-import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl'
+import MapGL, { NavigationControl, Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import React, { Component } from 'react'
@@ -28,7 +28,8 @@ class UberReactMap extends Component {
     super(props)
 
     this.state = {
-      mapStyle: 'mapbox://styles/mapbox/traffic-night-v2',
+      //mapStyle: 'mapbox://styles/mapbox/traffic-night-v2',
+      mapStyle: 'mapbox://styles/mapbox/streets-v9',
       viewport: {
         latitude: 37.805,
         longitude: -122.447,
@@ -106,41 +107,44 @@ class UberReactMap extends Component {
     }
   }
   
+  onStyleChange = (style) => {
+    console.log('Style changed to', style)
+    this.setState({mapStyle: style})
+  }
   render () {
     const { mapStyle, viewport } = this.state
 
     return (
-      <div className='child'>
-        <ReactMapGL
-          {...viewport}
-          mapStyle={mapStyle}
-          onViewportChange={this.onViewportChange}
-          onStyleChange={this.onStyleChange}
-          mapboxApiAccessToken={'pk.eyJ1IjoidHVuY2F0dW5jIiwiYSI6IkY2a2l5RlUifQ.YHooFKZuzsNjmMK0mzPUYw'} >
-          <div style={this.navStyle}>
-            <NavigationControl  onViewportChange={this.onViewportChange} />
+      <MapGL
+        {...viewport}
+        mapStyle={mapStyle}
+        onViewportChange={this.onViewportChange}
+        onStyleChange={this.onStyleChange}
+        mapboxApiAccessToken={'pk.eyJ1IjoidHVuY2F0dW5jIiwiYSI6IkY2a2l5RlUifQ.YHooFKZuzsNjmMK0mzPUYw'} >
+        <div style={this.navStyle}>
+          <NavigationControl  onViewportChange={this.onViewportChange} />
+        </div>
+        <ControlPanel onStyleChange={this.onStyleChange}/>
+        {
+        //   locationHistory.map((location, index) =>
+        //     <Marker 
+        //       key={index}
+        //       latitude={location.latitude} 
+        //       longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
+        //       <div>
+        //         <LocationPin></LocationPin>
+        //       </div>
+        //     </Marker>
+        //   )
+        }
+        <Marker 
+          latitude={this.state.location.latitude} 
+          longitude={this.state.location.longitude} offsetLeft={-20} offsetTop={-10}>
+          <div>
+            <LocationPin></LocationPin>
           </div>
-          {
-          //   locationHistory.map((location, index) =>
-          //     <Marker 
-          //       key={index}
-          //       latitude={location.latitude} 
-          //       longitude={location.longitude} offsetLeft={-20} offsetTop={-10}>
-          //       <div>
-          //         <LocationPin></LocationPin>
-          //       </div>
-          //     </Marker>
-          //   )
-          }
-          <Marker 
-            latitude={this.state.location.latitude} 
-            longitude={this.state.location.longitude} offsetLeft={-20} offsetTop={-10}>
-            <div>
-              <LocationPin></LocationPin>
-            </div>
-          </Marker>
-        </ReactMapGL>
-      </div>
+        </Marker>
+      </MapGL>
     )
   }
 }

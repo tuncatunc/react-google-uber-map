@@ -5599,6 +5599,10 @@ react-scripts@1.0.11:
   optionalDependencies:
     fsevents "1.1.2"
 
+react-splitter-layout@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-splitter-layout/-/react-splitter-layout-0.2.1.tgz#77099ab5e80b0fad3e0e8dc31dd4a93aa26441fa"
+
 react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"

@@ -38,27 +38,26 @@ class GoogleReactMap extends Component {
 
   render () {
     return (
-      <div className="child">
-        <GoogleMapReact
-          // apiKey={YOUR_GOOGLE_MAP_API_KEY} // set if you need stats etc ...
-          center={this.state.center}
-          zoom={this.state.zoom}
-          onChange={this.onChange}>
-          {
-            // locationHistory.map((location, index) =>
-            //   <LocationPin
-            //     key={index}
-            //     lat= { location.latitude }
-            //     lng= { location.longitude }
-            //   />
-            // )
-          }
-          <LocationPin
-            lat={this.state.yourHereCoords.lat}
-            lng={this.state.yourHereCoords.lng}
-          />
-        </GoogleMapReact>
-      </div>
+      <GoogleMapReact
+        // apiKey={YOUR_GOOGLE_MAP_API_KEY} // set if you need stats etc ...
+        center={this.state.center}
+        zoom={this.state.zoom}
+        onChange={this.onChange}
+      >
+        {
+          // locationHistory.map((location, index) =>
+          //   <LocationPin
+          //     key={index}
+          //     lat= { location.latitude }
+          //     lng= { location.longitude }
+          //   />
+          // )
+        }
+        <LocationPin
+          lat={this.state.yourHereCoords.lat}
+          lng={this.state.yourHereCoords.lng}
+        />
+      </GoogleMapReact>
     )
   }
 }
