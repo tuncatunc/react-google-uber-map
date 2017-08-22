@@ -1,32 +1,37 @@
-@import url(../node_modules/react-select/dist/react-select.css);
+@import '../node_modules/react-select/dist/react-select.css';
+
 .control-panel {
   position: absolute;
   top: 0;
   right: 0;
   max-width: 320px;
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   padding: 12px 24px;
   margin: 20px;
   font-size: 13px;
   line-height: 2;
-  color: #6b6b76;
+  color: #26267A;
   text-transform: uppercase;
   outline: none;
-  overflow: hidden; }
+  overflow: hidden
+}
 
 .map-panel {
   overflow: hidden;
   width: 100%;
-  height: 100%; }
+  height: 100%
+}
 
 .splitter-layout .layout-pane {
-  overflow: hidden !important; }
+  overflow: hidden !important
+}
 
 .location-input {
   position: fixed;
   left: 10px;
-  top: 10px;
+  top: 10px;  
   width: 85%;
-  background-color: coral;
-  z-index: 1000; }
+  background-color: #9D5F49;
+  z-index: 1000;
+}

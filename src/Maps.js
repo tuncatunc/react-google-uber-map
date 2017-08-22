@@ -22,6 +22,18 @@ class Maps extends Component {
     super(props)
   }
 
+  componentWillReceiveProps(nextProps) {
+    const next = {
+      center: {
+        ...this.state.center,
+        latitude: nextProps.selectedLocation.position.latitude,
+        longitude: nextProps.selectedLocation.position.longitude,
+      }
+    }
+
+    this.setState(next)
+  }
+  
   
   componentWillMount() {
     this.getLocation();
@@ -54,19 +66,18 @@ class Maps extends Component {
   render () {
     return (
       <SplitterLayout vertical={true} customClassName={'map-panel'}>
-        <div style={{width: 400, height: 400}}>
+        <div>
+          <UberReactMap 
+          location={this.state.location} 
+          center={this.state.center}
+          onChange={this.onMapChange}/>
+        </div>
+        <div style={{width: '100%', height: '100%'}}>
           <GoogleReactMap
           location={this.state.location} 
           onChange={this.onMapChange} 
           onDrag={(drag) => console.log(drag)}
           center={this.state.center}/>
-        </div>
-        <div>
-          <UberReactMap 
-          style={{overflow: 'hidden'}}
-          location={this.state.location} 
-          center={this.state.center}
-          onChange={this.onMapChange}/>
         </div>
       </SplitterLayout>
     )

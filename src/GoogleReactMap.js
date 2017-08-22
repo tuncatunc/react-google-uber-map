@@ -43,16 +43,10 @@ class GoogleReactMap extends Component {
         center={this.state.center}
         zoom={this.state.zoom}
         onChange={this.onChange}
+        width={400}
+        height={400}
       >
-        {
-          // locationHistory.map((location, index) =>
-          //   <LocationPin
-          //     key={index}
-          //     lat= { location.latitude }
-          //     lng= { location.longitude }
-          //   />
-          // )
-        }
+
         <LocationPin
           lat={this.state.yourHereCoords.lat}
           lng={this.state.yourHereCoords.lng}
